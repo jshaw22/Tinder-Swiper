@@ -2,12 +2,11 @@ const passport = require('passport');
 const User = require('../models/users');
 const config = require('../config');
 const JwtStrategy = require('passport-jwt').Strategy;
-const LocalStrategy = require('passport-local').Strategy;
+const LocalStrategy = require('passport-local');
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 
 // create local strategy for signing in  
-const localOptions = { usernameField: 'email' };
-const localLogin = new LocalStrategy ( {localOptions} , function (email, password, done) {
+const localLogin = new LocalStrategy ( {usernameField:'email'} , function (email, password, done) {
 
 	//verify this username and pw, call done with user
 	//if it is correct username and pw
@@ -17,10 +16,10 @@ const localLogin = new LocalStrategy ( {localOptions} , function (email, passwor
 			return done(err, false);
 		}
 		if(!user){
-			done(null, false);
+			return done(null, false);
 		} 
 		//compared pw's -- is password param equal to userpw? 
-		user.comparePassword(password, function (err, isMatch) {
+		user.comparePasswords(password, function (err, isMatch) {
 			if (err) {
 				return done(err);
 			}
@@ -29,8 +28,6 @@ const localLogin = new LocalStrategy ( {localOptions} , function (email, passwor
 			}
 			return done(null, user);
 		})
-
-
 	});
 });
 
@@ -52,9 +49,9 @@ const jwtLogin = new JwtStrategy(jwtOptions, function (payload, done) {
 			return done(err, false);
 		}
 		if (user){
-			done(null, user);
+			return done(null, user);
 		} else {
-			done(null, false);
+			return done(null, false);
 		}
 	});
 });

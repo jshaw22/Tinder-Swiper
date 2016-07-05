@@ -12,7 +12,7 @@ function tokenForUser(user){
 
 exports.signin = function (req, res, next) {
 	//give user a token. user should be auth'ed at this point thanks to the middleware 
-	req.send({token: tokenForUser(req.user)})
+	res.send({token: tokenForUser(req.user)})
 }
 
 exports.signup = function(req, res, next) {
