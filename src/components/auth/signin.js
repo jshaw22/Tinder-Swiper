@@ -5,9 +5,8 @@ import * as actions from '../../actions';
 
 class Signin extends Component {
 	
-	handleFormSubmit({ email, password }){
-		console.log(email, password);
-		this.props.signinUser({email, password});
+	handleFormSubmit({ userName, password }){
+		this.props.signinUser({userName, password});
 	}
 
 	renderAlert() {
@@ -19,13 +18,13 @@ class Signin extends Component {
 	}
 
 	render () {
-		const { handleSubmit, fields: {email, password} } = this.props;
+		const { handleSubmit, fields: {userName, password} } = this.props;
 
 		return (
 				<form onSubmit = {handleSubmit(this.handleFormSubmit.bind(this))}>
 				<fieldset className ='form-group'>
-					<label>Email:</label>
-					<input {...email} className='form-control' />  
+					<label>Username:</label>
+					<input {...userName} className='form-control' />  
 				</fieldset>
 				<fieldset className='form-group'>
 					<label>Password:</label>
@@ -44,7 +43,7 @@ function mapStateToProps(state){
 
 export default reduxForm({
 	form: 'signin',
-	fields: ['email', 'password']
+	fields: ['userName', 'password']
 
 }, mapStateToProps, actions)(Signin); 
 //acts similar to connect. first param is mapstatetoprops, second is mapstatetoactions

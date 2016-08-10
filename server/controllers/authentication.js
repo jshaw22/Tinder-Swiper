@@ -16,25 +16,25 @@ exports.signin = function (req, res, next) {
 }
 
 exports.signup = function(req, res, next) {
-	const email = req.body.email;
+	const userName = req.body.userName;
 	const password = req.body.password;
 
-	if(!email || !password) {
-		return res.status(422).send({error: "You must provide email and password"});
+	if(!userName || !password) {
+		return res.status(422).send({error: "You must provide a username and password"});
 	}
 	
-	// See if a user with the given email exists
-	User.findOne({email: email}, function (err, existingUser) {
-	  // If a user with email does not exist, return an error
+	// See if a user with the given username exists
+	User.findOne({userName: userName}, function (err, existingUser) {
+	  // If a user with username does not exist, return an error
 		if (err) {return next(err);}
 
 		if(existingUser){
-			return res.status(422).send({error: 'Email is in use'});
+			return res.status(422).send({error: 'Username is already in use'});
 		}
 
-		// If a user with email does NOT exist, create and save user record
+		// If a user with username does NOT exist, create and save user record
 		const user = new User({
-			email: email,
+			userName: userName,
 			password: password
 		})
 
