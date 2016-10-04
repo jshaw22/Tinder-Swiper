@@ -9,14 +9,12 @@ import {
 	GET_RECOMMENDATIONS, 
 	NAME_RECEIVED } from './types';
 
-const API_URL = 'http://localhost:3000';
+axios.defaults.baseURL = 'http://localhost:3000';
 
 
-var accessToken;
-var userID;
-var userName;
+var accessToken, userID, userName;
 
-function statusChangeCallback(response) {
+ function statusChangeCallback(response) {
     console.log('statusChangeCallback');
     console.log(response);
     // The response object is returned with a status field that lets the
@@ -24,52 +22,32 @@ function statusChangeCallback(response) {
     // Full docs on the response object can be found in the documentation
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
+    	accessToken = response.authResponse.accessToken;
+    	userID = response.authResponse.userID;
+
       // Logged into your app and Facebook.
-      console.log("We are connected")
-      accessToken = response.authResponse.accessToken;
-      userID = response.authResponse.userID; 
-      FB.api('/me', function(response){
-      	userName = response.name;
-      })
-
-
-
-// return function (dispatch) {
-// 	//submit email/password to server
-// 	axios.post(`${API_URL}/signin`, {userName: userName, password: password})
-// 		.then(response => {
-// 		  //if request is good..
-// 			// 1.) update state to indicate user is authed. 
-// 			dispatch( { type: AUTH_USER } );
-
-  //   else if (response.status === 'not_authorized') {
-  //     // The person is logged into Facebook, but not your app.
-  //     	return { 
-		// 	type: AUTH_ERROR,
-		// 	payload: "not_authorized"
-		// }
-  //   } else {
-  //     // The person is not logged into Facebook, so we're not sure if
-  //     // they are logged into this app or not.
-  //     	return {
-  //     		type: NEEDS_LOGIN,
-  //     		payload: "needs_login"
-  //     	}
-  //   }
- 	 }
-	}
+      	FB.api('/me', function(response) {
+      	console.dir('Successful login for: ' + response.name);
+      	userName = response.name;   
+    });
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+     
+    }
+  }
 
   // This function is called when someone finishes with the Login
   // Button.  See the onlogin handler attached to it in the sample
   // code below.
-  // export function checkLoginState() {
-  //   FB.getLoginStatus(function(response) {
-  //     statusChangeCallback(response);
-  //   });
-  // }
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
 
-
-//init fb details 
   window.fbAsyncInit = function() {
   FB.init({
     appId      : '984102938292005',
@@ -92,17 +70,28 @@ function statusChangeCallback(response) {
   // These three cases are handled in the callback function.
 
   FB.getLoginStatus(function(response) {
- 	statusChangeCallback(response)
- });
+    statusChangeCallback(response);
+  });
+
+  };
 
   // Load the SDK asynchronously
-}
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 
+ 
 
 export function login() {
 	console.log("login button clicked")
+
 	return function(dispatch){
-		axios.post('${API_URL}/tinder', {accessToken: accessToken, userID: userID, userName: userName})
+		console.log("sending off the accessToken", accessToken)
+		axios.post('/matches', {accessToken: accessToken, userID: userID, userName: userName})
 		.then (response => {
 		console.log("response", response)
 		dispatch({
