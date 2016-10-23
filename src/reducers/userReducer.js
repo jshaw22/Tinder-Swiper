@@ -5,16 +5,23 @@ import { AUTH_USER,
 	AUTH_SUCCESS, 
 	GET_RECOMMENDATIONS,
 	NAME_RECEIVED } from '../actions/types';
+import _ from "lodash";
+
+//todo set up initial state 
+const initialState = {
+	userInfo: '',
+	loggedIn: false,
+
+}
+
 
 export default function (state = {}, action){
 	switch(action.type) {
 		case AUTH_SUCCESS:
-			console.log("Auth success reducer hit")
-			console.log(action.payload)
-			return {userInfo: action.payload, loggedIn: true};
+			return {...state, userInfo: action.payload, loggedIn: true};
 		case GET_RECOMMENDATIONS:
-			console.log("Get Recommendations hit")
-			return {recs: action.payload };
+			console.log("Get Recommendations hit");
+			return {...state, recs: action.payload.data };
 		case AUTH_ERROR:
 			return{ ...state, error: action.payload };
 		case FETCH_MESSAGE:

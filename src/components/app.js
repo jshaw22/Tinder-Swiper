@@ -12,9 +12,7 @@ class App extends Component {
   }
 
   renderState() {
-   console.log("authenticated object",this.props.authenticated)
    if(this.props.authenticated.loggedIn){
-
     return <Matches />
    }
   }
@@ -22,7 +20,7 @@ class App extends Component {
   render() {
     return (
     	<div>
-        <div>render me</div>
+        <div>TinderSwiper for Desktop App</div>
         <button onClick = {this.renderLogin.bind(this)}>Login with Facebook</button>
         {this.renderState()}
         

@@ -1,3 +1,11 @@
 .error { 
 color:red;
  }
+
+ .welcomeName {
+ 	margin-bottom:20px;
+ }
+
+[class*="col-"] {
+    margin-bottom: 5px;
+}

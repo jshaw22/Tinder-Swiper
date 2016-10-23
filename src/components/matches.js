@@ -14,18 +14,52 @@ class Matches extends Component {
 		const userID = this.props.loginInfo.userInfo.userID;
 	}
 
+	renderMatchProfile () {
+		//ew this validation is so unclean. pls fix
+		if(this.props.match){
+			const {bio, name, photos} = this.props.match;
+			console.log(bio, name, photos)
+
+			const renderPictures = () => {
+				return photos.map((pic, idx) => {
+					const pictureThumbnailLink = pic.processedFiles[1].url;
+					return (
+						<div key={idx} className="col-sm-6 col-xs-12">
+							<div className="col-sm-12 col-xs-12">
+								<img src={pictureThumbnailLink} />
+							</div>
+						</div>
+						)
+				})
+			}
+
+			return (
+				<div>
+					<div className="matchName"><strong>Match name:</strong> {name}</div>
+					<div className="bio"><strong>Bio:</strong> {bio}</div>
+					<div className="row">
+						{renderPictures()}
+					</div>
+				</div>
+			)
+		}
+	}
 
   render() {
     return (
     	<div>
-    		Welcome, {this.props.loginInfo.userInfo.userName}
+    		<div className="welcomeName">Welcome, {this.props.loginInfo.userInfo.userName}</div>
+    		{this.renderMatchProfile()}
     	</div>
     )
   }
 }
 
 function mapStateToProps(state){
-	return {loginInfo: state.user};
+	return {
+		loginInfo: state.user,
+		match: state.user.recs
+	};
 }
 
 export default connect(mapStateToProps, actions)(Matches);

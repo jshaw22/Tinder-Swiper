@@ -87,7 +87,6 @@ var accessToken, userID, userName;
  
 
 export function login() {
-	console.log("login button clicked")
 
 	return function(dispatch){
 		console.log("sending off the accessToken", accessToken)
@@ -97,17 +96,18 @@ export function login() {
 		dispatch({
 			type: AUTH_SUCCESS,
 			payload: { accessToken, userID, userName }
-			})
-	})
-	// return {
-	// 	type: AUTH_SUCCESS,
-	// 	payload: {accessToken, userID, userName }
-	// }
+			});
+		dispatch(getMatches(response));
+		});
 	}
 }
 
-
-
+function getMatches (data) {
+	return ({
+		type: GET_RECOMMENDATIONS,
+		payload: data
+	});
+}
 
 
 
