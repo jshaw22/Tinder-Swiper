@@ -9,3 +9,12 @@ color:red;
 [class*="col-"] {
     margin-bottom: 5px;
 }
+
+.buttons {
+	display: inline-block;
+}
+
+.btn {
+	margin:3px;
+	width: 120px;
+}

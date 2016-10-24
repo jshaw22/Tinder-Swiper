@@ -12,18 +12,23 @@ class App extends Component {
   }
 
   renderState() {
-   if(this.props.authenticated.loggedIn){
+   if (!this.props.authenticated.loggedIn) {
+    return (
+      <div>
+        <button onClick = {this.renderLogin.bind(this)}>Login with Facebook</button> 
+        <div>{this.props.authenticated.loadingStatus}</div>
+      </div>
+    )
+   } else { 
     return <Matches />
-   }
+    }
   }
 
   render() {
     return (
     	<div>
         <div>TinderSwiper for Desktop App</div>
-        <button onClick = {this.renderLogin.bind(this)}>Login with Facebook</button>
         {this.renderState()}
-        
       </div>
     )
   }

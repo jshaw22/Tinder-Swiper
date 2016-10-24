@@ -22,4 +22,19 @@ module.exports = function (app) {
 				});
 			});
 	});
+
+	app.post('/likes', function(req, res) {
+		console.log("token and ID received", req.body)
+		client.authorize(
+			token,
+			req.body.userID,
+			function(){
+				client.getRecommendations(10, function(err, data) {
+					if (err)
+						throw new Error('Error fetching recommendations');
+					console.log("here be data", data.results[0]);
+					res.send(data.results[0]);
+				});
+			});
+	});
 }

@@ -3,6 +3,8 @@ import axios from 'axios';
 import { 
 	AUTH_USER, 
 	AUTH_ERROR,
+	LOADING_STATUS,
+	LIKE_MATCH,
 	UNAUTH_USER, 
 	FETCH_MESSAGE, 
 	AUTH_SUCCESS, 
@@ -87,8 +89,10 @@ var accessToken, userID, userName;
  
 
 export function login() {
-
 	return function(dispatch){
+		dispatch({
+		type: LOADING_STATUS
+		});
 		console.log("sending off the accessToken", accessToken)
 		axios.post('/matches', {accessToken: accessToken, userID: userID, userName: userName})
 		.then (response => {
@@ -109,6 +113,15 @@ function getMatches (data) {
 	});
 }
 
+
+// export function likeMatch(id) {
+// 	console.log("likematch called")
+// 	console.log("match id", id);
+// 	return function(dispatch) {
+// 		axios.post('/likes', id)
+// 		.then (response => {}
+// 	}
+// }
 
 
 export function signinUser({userName, password}){
