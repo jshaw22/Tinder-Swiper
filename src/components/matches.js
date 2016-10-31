@@ -11,6 +11,10 @@ class Matches extends Component {
 		const userID = this.props.loginInfo.userInfo.userID;
 	}
 
+	componentWillReceiveProps (nextProps){
+	
+	}
+
 	renderMatchProfile () {
 		//ew this validation is so unclean. pls fix
 		if(this.props.match){
@@ -73,10 +77,14 @@ class Matches extends Component {
   }
 }
 
+
+/* technically you don't need to connect this component to
+a store but rather just receive props from parent */ 
 function mapStateToProps(state){
 	return {
 		loginInfo: state.user,
-		match: state.user.recs
+		match: state.user.recs,
+		likedBack: state.user.likedBack
 	};
 }
 

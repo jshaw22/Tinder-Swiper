@@ -11,6 +11,9 @@ class App extends Component {
     this.props.login();
   }
 
+  componentWillReceiveProps (nextProps) {
+  }
+
   renderState() {
    if (!this.props.authenticated.loggedIn) {
     return (
@@ -35,7 +38,8 @@ class App extends Component {
 }
 
 function mapStateToProps(state){
-	return {authenticated: state.user};
+	return {authenticated: state.user,
+          likedBack: state.user.likedBack};
 }
 
 export default connect(mapStateToProps, actions)(App);
