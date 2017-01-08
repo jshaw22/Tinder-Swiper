@@ -5,6 +5,7 @@ import { AUTH_USER,
 	FETCH_MESSAGE, 
 	AUTH_SUCCESS, 
 	GET_RECOMMENDATIONS,
+	LIKE_MATCH,
 	NAME_RECEIVED } from '../actions/types';
 import _ from "lodash";
 
@@ -27,6 +28,8 @@ export default function (state = {}, action){
 			return{...state, loadingStatus: "Logging in..."}	
 		case AUTH_ERROR:
 			return{ ...state, error: action.payload };
+		case LIKE_MATCH: 
+			return {...state, likedBack: action.payload.match}
 		case FETCH_MESSAGE:
 			return {...state, message: action.payload};
 

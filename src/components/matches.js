@@ -89,10 +89,14 @@ class Matches extends Component {
   }
 }
 
+
+/* technically you don't need to connect this component to
+a store but rather just receive props from parent */ 
 function mapStateToProps(state){
 	return {
 		loginInfo: state.user,
-		match: state.user.recs
+		match: state.user.recs,
+		likedBack: state.user.likedBack
 	};
 }
 

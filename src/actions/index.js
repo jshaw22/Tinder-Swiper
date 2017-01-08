@@ -115,16 +115,32 @@ function getMatches (data) {
 	});
 }
 
+export function likeMatch(id) {
+	return function (dispatch){
+		axios.post('/likes', {userID, id})
+		.then (response => {
+			console.log("like response", response)
+			dispatch({
+				type: LIKE_MATCH,
+				payload: response.data
+			});
+			getNextMatch();
+		});
 
-// export function likeMatch(id) {
-// 	console.log("likematch called")
-// 	console.log("match id", id);
-// 	return function(dispatch) {
-// 		axios.post('/likes', id)
-// 		.then (response => {}
-// 	}
-// }
+	}
 
+
+}
+
+export function getNextMatch() {
+	console.log('get next match called')
+	return function(dispatch){
+		axios.post('/matches', {accessToken: accessToken, userID: userID, userName: userName})
+		.then (response => {
+			dispatch(getMatches(response));
+		});
+	}
+}
 
 export function signinUser({userName, password}){
 	//dispatch can handle many different functions 
