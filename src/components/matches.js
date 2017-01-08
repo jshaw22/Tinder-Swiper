@@ -13,14 +13,17 @@ class Matches extends Component {
 
 	passUser () {
 		// write the code for this
+		// probably need to write some actions 
 	}
 
 	likeUser () {
 		// write the code for this
+		// will need to write some actions 
 	}
 
 	superLikeUser () {
 		//hook this up 
+		//add some actions dammit 
 	}
 
 	renderMatchProfile () {
