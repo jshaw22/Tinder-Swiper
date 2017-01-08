@@ -16,6 +16,8 @@ axios.defaults.baseURL = 'http://localhost:3000';
 
 var accessToken, userID, userName;
 
+
+// This is for facebook login
  function statusChangeCallback(response) {
     console.log('statusChangeCallback');
     console.log(response);

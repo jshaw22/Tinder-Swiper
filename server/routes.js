@@ -5,7 +5,7 @@ var client = new tinder.TinderClient();
 var _ = require('lodash');
 
 //manual justin token needs to be programtically replaced 
-var token = "EAAGm0PX4ZCpsBACjNakeJRJQk81l2lKk1lAAOHAG5lPetfa6BPUZClR9UAreSh2Q3GgOecriGYNEkdp51kCzf7m2ZCicd5UhReWDdiRZBRZCtps3UXSVRADr5fJ3hCetyow8DcciGWj1rIZCbZA7fTn1xozZBs7O2umQpp2mE9iak9ZBSfk2LgNc0vBjYIeCHArDVxRAZAR4kIYeCBuORZC1WHm9EycO1Pklv6OFmMAB4q8JQZDZD";
+var token = "EAAGm0PX4ZCpsBABtFOWfA9WWZBSXV55ZCqVfERRyxZCMg6nLiZCDvcrBdO8uYFzw9WlKbFvi3RcWApUFlfa9Jf2YoQajFhJETvWSnvKN7TfwaaXOTGid3wYYAtE4y6TAgxrzH6R8uQk5LzuL7lzSLynZBiaEtOQXandQGBHRNUH0NRcmQalOO3v7pN6WErdDYJt6ZB4yJd7Pe6egG4j8jMGDbR0dNum8jh5pLjm6DYg8AZDZD";
 
 module.exports = function (app) {
 	app.post('/matches', function(req, res) {

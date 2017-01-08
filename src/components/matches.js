@@ -11,6 +11,18 @@ class Matches extends Component {
 		const userID = this.props.loginInfo.userInfo.userID;
 	}
 
+	passUser () {
+		// write the code for this
+	}
+
+	likeUser () {
+		// write the code for this
+	}
+
+	superLikeUser () {
+		//hook this up 
+	}
+
 	renderMatchProfile () {
 		//ew this validation is so unclean. pls fix
 		if(this.props.match){
@@ -44,12 +56,13 @@ class Matches extends Component {
 			// 	}
 			// }
 
+
 			return (
 				<div>
 					<div className="buttons">
-						<button className="btn btn-danger">Pass</button>
-						<button className="btn btn-success" onClick={this.props.likeMatch.bind(this, _id)}>Like</button>
-						<button className="btn btn-info">Super Like!</button>
+						<button onClick={this.passUser} className="btn btn-danger">Pass</button>
+						<button onClick={this.likeUser} className="btn btn-success">Like</button>
+						<button onClick={this.superLikeUser} className="btn btn-info">Super Like!</button>
 					</div>
 						
 					<div className="matchName"><strong>Match name:</strong> {name}</div>
